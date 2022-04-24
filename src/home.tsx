@@ -16,7 +16,7 @@ export default function Home  () {
             <Navbar/>
             <Box>
                  <Stack justifyContent="space-evenly" direction="row" spacing={2}>
-                
+                    <Sidebar/>
                   <Feed/>
                   <RightBar/> 
             </Stack>
