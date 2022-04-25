@@ -16,7 +16,7 @@ export default function Post(props: PostProps){
     const { name,date,image,avatar } = props;
     return(
         <>
-        <Card sx={{ maxWidth: 345, marginTop: '40px' }} >
+        <Card sx={{ maxWidth: 545, marginTop: '40px' }} >
                 <CardHeader
                     avatar={
                         <Avatar alt="Remy Sharp" src={`${avatar}`} />
@@ -32,7 +32,7 @@ export default function Post(props: PostProps){
                 />
                 <CardMedia
                     component="img"
-                    height="60%"
+                    height="20%"
                     image ={`${image}`}
                     alt="Paella dish"
                 />

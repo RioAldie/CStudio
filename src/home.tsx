@@ -5,6 +5,7 @@ import Feed from './component/feed';
 import RightBar from './component/rightbar';
 import Navbar from './component/navbar';
 import Sidebar from './component/sidebar';
+import Add from './component/add';
 
 
 export default function Home  () {
@@ -20,7 +21,7 @@ export default function Home  () {
                   <Feed/>
                   <RightBar/> 
             </Stack>
-         
+            <Add/>
             </Box>
            
         </>
