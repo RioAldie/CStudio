@@ -1,14 +1,8 @@
 import { Badge, Box, List, ListItem, ListItemIcon, ListItemText, ListItemButton, Typography } from "@mui/material";
-import EmailIcon from '@mui/icons-material/Email';
-import HomeIcon from '@mui/icons-material/Home';
-import NotificationsIcon from '@mui/icons-material/Notifications';
-import CollectionsIcon from '@mui/icons-material/Collections';
-import SettingsIcon from '@mui/icons-material/Settings';
 import ForestIcon from '@mui/icons-material/Forest';
 import LandscapeIcon from '@mui/icons-material/Landscape';
 import ChairIcon from '@mui/icons-material/Chair';
 import PetsIcon from '@mui/icons-material/Pets';
-import DirectionsWalkIcon from '@mui/icons-material/DirectionsWalk';
 import DirectionsBikeIcon from '@mui/icons-material/DirectionsBike';
 const Sidebar = () =>{
     return(

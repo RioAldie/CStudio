@@ -20,9 +20,10 @@ const NavLink = styled(Button)({
 })
 const NavList = styled("div")(({theme}) =>({
     display: "none",
-    width: 500,
+    width: 600,
     color: 'lightgray',
     alignSelf: 'center',
+    marginLeft: '-100px',
     justifyContent: "space-evenly",
     [theme.breakpoints.up("md")]:{
         display: "flex"

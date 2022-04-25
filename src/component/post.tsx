@@ -8,19 +8,18 @@ import { ExpandMore, Favorite, FavoriteBorder } from "@mui/icons-material";
 interface PostProps{
     name: String,
     date: String,
-    image: String
+    image: String,
+    avatar: String
 }
 export default function Post(props: PostProps){
 
-    const { name,date,image } = props;
+    const { name,date,image,avatar } = props;
     return(
         <>
-        <Card sx={{ maxWidth: 345, marginTop: '20px' }} >
+        <Card sx={{ maxWidth: 345, marginTop: '40px' }} >
                 <CardHeader
                     avatar={
-                    <Avatar sx={{ bgcolor: "red"}} aria-label="recipe">
-                        R
-                    </Avatar>
+                        <Avatar alt="Remy Sharp" src={`${avatar}`} />
                     }
                     action={
                     <IconButton aria-label="settings">
@@ -29,6 +28,7 @@ export default function Post(props: PostProps){
                     }
                     title={name}
                     subheader={date}
+                    sx={{ cursor: 'pointer'}}
                 />
                 <CardMedia
                     component="img"
