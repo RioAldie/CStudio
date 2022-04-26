@@ -28,7 +28,30 @@ export default function Add(){
                     sx={{
                         position: 'fixed',
                         bottom: 20,
-                        md: 20
+                        md: 20,
+                        ml: 20,
+                        mb: 5,
+                        display:{
+                            xs: 'none',
+                            md: 'flex'
+                        }
+                    }}
+                    >
+                        <Fab aria-label="add" color="primary">
+                            <AddIcon/>
+                        </Fab>
+                </Tooltip>
+                <Tooltip title="Add" arrow
+                    sx={{
+                        position: 'fixed',
+                        bottom: 10,
+                        md: 20,
+                        ml: 80,
+                        mb: 5,
+                        display:{
+                            xs: 'flex',
+                            md: 'none'
+                        }
                     }}
                     >
                         <Fab aria-label="add" color="primary">
@@ -48,7 +71,7 @@ export default function Add(){
                 }}
             >
                 <Fade in={open}>
-                <Box width={500} height={320} bgcolor="white" p={3} borderRadius={3} >
+                <Box width={500} height={320} bgcolor={"background.default"} color={"text.primary"} p={3} borderRadius={3} >
                    <Typography variant="h5" color="gray" textAlign={'center'}>Post Content</Typography>
                     <ListItem alignItems="flex-start" sx={{cursor: 'pointer'}}>
                     <ListItemAvatar>

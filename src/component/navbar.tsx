@@ -1,8 +1,9 @@
-import { AppBar, Box, styled, Toolbar, Typography, Menu, MenuItem , Button} from "@mui/material";
+import { AppBar, Box, styled, Toolbar, Typography, Menu, MenuItem , Button, PaletteMode} from "@mui/material";
 import { PhotoCamera } from "@mui/icons-material";
 import Switch from '@mui/material/Switch';
 import MenuIcon from '@mui/icons-material/Menu';
-import { useState } from "react";
+import React, { Dispatch, DispatchWithoutAction, SetStateAction, useEffect, useState } from "react";
+import { hover } from "@testing-library/user-event/dist/hover";
 
 
 const StyledToolbar = styled(Toolbar)({
@@ -16,7 +17,8 @@ const NavBox = styled(Box)({
     justifyContent: "space-evenly"
 });
 const NavLink = styled(Button)({
-    color: 'inherit'
+    color: 'white'
+    
 })
 const NavList = styled("div")(({theme}) =>({
     display: "none",
@@ -29,14 +31,19 @@ const NavList = styled("div")(({theme}) =>({
         display: "flex"
     }
 }))
+interface NavProps{
+    mode: PaletteMode,
+    setMode: React.Dispatch<React.SetStateAction<PaletteMode>>,
+}
 
-
-export default function Navbar (){
+export default function Navbar (props: NavProps){
     const [open, setOpen] = useState(false);
     const [checked, setChecked] = useState(false);
+    const [theme, setTheme] = useState<PaletteMode>('light');
+    const { mode, setMode} = props;
     return(
         <>
-        <AppBar position="sticky" >
+        <AppBar position="sticky" color="primary">
             <StyledToolbar>
                 <NavBox>
                     <PhotoCamera/>
@@ -61,9 +68,10 @@ export default function Navbar (){
                 <NavBox>
                <Switch
                 checked={checked}
-                onChange={(e)=>setChecked(!checked)}
+                onChange={(e)=>setMode(mode === 'light' ? 'dark' : 'light')}
+                onClick={(e)=>setChecked(!checked)}
                 inputProps={{ 'aria-label': 'controlled' }}
-                color="warning"
+                color="primary"
                 />
                 <MenuIcon sx={{display:{ xs: 'block', sm:'block', md:'none'}}} onClick={(e) =>setOpen(true)}/>
                <Menu

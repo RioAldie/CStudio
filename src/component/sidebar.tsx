@@ -13,7 +13,7 @@ const Sidebar = () =>{
                 <ListItem disablePadding>
                     <ListItemButton component="a" href="#">
                         <ListItemIcon>
-                            <ForestIcon/>
+                            <ForestIcon />
                         </ListItemIcon>
                         <ListItemText primary="Hutan"/>
                     </ListItemButton>
