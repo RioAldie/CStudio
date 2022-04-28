@@ -1,4 +1,4 @@
-import {Typography, CssBaseline, Grid, Box, Toolbar, Stack, createTheme, ThemeProvider}  from '@mui/material';
+import {Typography, CssBaseline, Grid, Box, Toolbar, Stack, createTheme, ThemeProvider, PaletteMode}  from '@mui/material';
 import {PhotoCamera} from '@mui/icons-material';
 import Feed from './component/feed';
 
@@ -9,29 +9,31 @@ import Add from './component/add';
 import { useState } from 'react';
 import { text } from 'stream/consumers';
 
-export default function Home  () {
+export default function Home () {
 
-const [mode, setMode] = useState(); 
+const [mode, setMode] = useState<PaletteMode>('light'); 
 const DarkTheme = createTheme({
     palette:{
-        mode: 'dark'
+        mode: mode,
+        primary: {
+          main: '#FF5F00'
+        }
     }
 }) 
     return(
-        <>
-        <ThemeProvider theme={DarkTheme}>
-           
-            <Box bgcolor={"background.default"} color={"text.primary"}>
-                 <Stack justifyContent="space-evenly" direction="row" spacing={2}>
-                    <Sidebar/>
-                  <Feed/>
-                  <RightBar/> 
+      <><CssBaseline />
+      <ThemeProvider theme={DarkTheme}>
+        <Box bgcolor={"background.default"} color={"text.primary"}>
+          <Navbar setMode={setMode} mode={mode}  />
+          <Box>
+            <Stack justifyContent="space-evenly" direction="row" spacing={2}>
+              <Sidebar />
+              <Feed />
+              <RightBar />
             </Stack>
-            <Add/>
-            </Box>
-        </ThemeProvider>
-            
-           
-        </>
+            <Add />
+          </Box>
+        </Box>
+      </ThemeProvider></>
     )
 }
