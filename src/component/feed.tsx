@@ -1,9 +1,4 @@
 import { Avatar, Box,Card,CardActions,CardContent,CardHeader,CardMedia,Checkbox,Collapse,IconButton,styled,Typography } from "@mui/material";
-import MoreVertIcon from '@mui/icons-material/MoreVert';
-import FavoriteIcon from '@mui/icons-material/Favorite';
-import ShareIcon from '@mui/icons-material/Share';
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import { ExpandMore, Favorite, FavoriteBorder } from "@mui/icons-material";
 import Post from "./post";
 const Feed = () =>{
 

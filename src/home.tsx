@@ -1,20 +1,22 @@
-import {Typography, CssBaseline, Grid, Box, Toolbar, Stack, createTheme, ThemeProvider, PaletteMode}  from '@mui/material';
-import {PhotoCamera} from '@mui/icons-material';
+import { CssBaseline,  Box, Stack, createTheme, ThemeProvider, PaletteMode}  from '@mui/material';
 import Feed from './component/feed';
-
 import RightBar from './component/rightbar';
 import Navbar from './component/navbar';
 import Sidebar from './component/sidebar';
 import Add from './component/add';
-import { useState } from 'react';
-import { text } from 'stream/consumers';
 
-export default function Home () {
 
-const [mode, setMode] = useState<PaletteMode>('light'); 
+interface HomeProps{
+    mode: PaletteMode,
+    setMode: React.Dispatch<React.SetStateAction<PaletteMode>>,
+}
+export default function Home (props: HomeProps) {
+
+
+const { mode, setMode} = props; 
 const DarkTheme = createTheme({
     palette:{
-        mode: mode,
+       mode: mode,
         primary: {
           main: '#FF5F00'
         }

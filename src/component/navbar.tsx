@@ -52,18 +52,7 @@ export default function Navbar (props: NavProps){
                 </NavBox>
                
                 <NavList>
-                    <NavLink color="inherit" >
-                        Home
-                    </NavLink>
-                    <NavLink color="inherit">
-                        Katalog
-                    </NavLink>
-                    <NavLink color="inherit">
-                        About
-                    </NavLink>
-                    <NavLink>
-                        Contact
-                    </NavLink>
+                   
 
                 </NavList>
                 <NavBox>
