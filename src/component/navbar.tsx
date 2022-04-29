@@ -39,7 +39,7 @@ interface NavProps{
 export default function Navbar (props: NavProps){
     const [open, setOpen] = useState(false);
     const [checked, setChecked] = useState(false);
-    const [theme, setTheme] = useState<PaletteMode>('light');
+   
     const { mode, setMode} = props;
     return(
         <>

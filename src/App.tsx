@@ -1,4 +1,4 @@
-import React from "react";
+import { createTheme, PaletteMode, ThemeProvider } from "@mui/material";
 import {
   BrowserRouter as Router,
   Route,
@@ -9,13 +9,26 @@ import {
 import Home from "./home";
 import SignUp from "./signup";
 
+
 export default function App() {
+
+const DarkTheme = createTheme({
+  palette:{
+      
+      primary: {
+        main: '#FF5F00'
+      }
+  }
+})
   return (
     <BrowserRouter>
-    <Routes>
-      <Route path="/" element={<Home />} />
-      <Route path="/Signup" element={<SignUp />} />
-    </Routes>
+    <ThemeProvider  theme={DarkTheme}>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/Signup" element={<SignUp />} />
+      </Routes>
+    </ThemeProvider>
+    
   </BrowserRouter>
   );
 }
