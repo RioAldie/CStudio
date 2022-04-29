@@ -3,7 +3,8 @@ import { PhotoCamera } from "@mui/icons-material";
 import Switch from '@mui/material/Switch';
 import MenuIcon from '@mui/icons-material/Menu';
 import React, { Dispatch, DispatchWithoutAction, SetStateAction, useEffect, useState } from "react";
-import { hover } from "@testing-library/user-event/dist/hover";
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import SignIn from "./signin";
 
 
 const StyledToolbar = styled(Toolbar)({
@@ -73,6 +74,10 @@ export default function Navbar (props: NavProps){
                 inputProps={{ 'aria-label': 'controlled' }}
                 color="primary"
                 />
+                <Box sx={{display:{xs: 'none',sm: 'block'}}}>
+                     <SignIn />
+                </Box>
+               
                 <MenuIcon sx={{display:{ xs: 'block', sm:'block', md:'none'}}} onClick={(e) =>setOpen(true)}/>
                <Menu
                     id="demo-positioned-menu"
@@ -92,6 +97,7 @@ export default function Navbar (props: NavProps){
                     <MenuItem >Katalog</MenuItem>
                     <MenuItem >About</MenuItem>
                     <MenuItem >Contact</MenuItem>
+                    <MenuItem ><SignIn/></MenuItem>
                 </Menu>
                </NavBox>
             </StyledToolbar>
