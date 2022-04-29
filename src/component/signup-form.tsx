@@ -7,7 +7,7 @@ const BoxStyled = styled(Box)({
     flexDirection: 'column',
     justifyContent: 'space-evenly',
     alignItems: 'center',
-    height: 600,
+    height: 700,
 });
 const NavBox = styled(Box)({
     display: "flex",
@@ -27,15 +27,14 @@ export default function SignupForm(){
                         label: 'Creator'
 
                 }]
-    useEffect(()=>{
-        return console.log(value);
-    })
+   
     return(
-        <Box bgcolor={"grey"} flex={1}  p={1}>
+        
+        <Box bgcolor={"grey"} flex={0.5}  p={2} justifyContent="center" alignItems="center">
             <AppBar position="relative" color="primary">
                  <NavBox>
                     <PhotoCamera/>
-                    <Typography variant="h6" sx={{display:{ xs: 'none', sm:'block'}}}>CStudio</Typography>
+                    <Typography variant="h5">CStudio</Typography>
                   </NavBox>
             </AppBar>
           
@@ -43,15 +42,15 @@ export default function SignupForm(){
             <Typography variant="h5" color={"primary"}>
                     Register
                 </Typography>
-                <Box width={470} sx={{ display: 'flex', justifyContent: 'space-between'}}>
+                <Box  width={400} sx={{ maxWidth: 545,display: 'flex', justifyContent: 'space-between'}}>
                     <TextField 
                     id="firtsname" 
                     label="Firstname" 
-                    variant="outlined" />
+                    variant="outlined" sx={{width: 190}} />
                     <TextField 
                     id="lastname" 
                     label="Lastname" 
-                    variant="outlined" />
+                    variant="outlined"sx={{width: 190}} />
                 </Box>
                  
                 <TextField 

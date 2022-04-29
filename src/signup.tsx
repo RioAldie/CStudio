@@ -1,16 +1,17 @@
 import { Box, CssBaseline, Stack } from "@mui/material";
+import Hero from "./component/hero";
 import SignupForm from "./component/signup-form";
+
 
 export default function SignUp(){
     return(
         <>
         <CssBaseline />
-        <Box >
-            <Stack justifyContent="space-evenly" direction="row" spacing={2}>
+        <Box sx={{display: 'flex', justifyContent:'center', alignItems: 'center'}}>
+            <Stack justifyContent="space-between" direction="row" spacing={2}>
                 <SignupForm/>
-                <Box bgcolor={"yellow"} flex={2}>hero</Box> 
+                <Hero />
             </Stack>
-           
         </Box>
         </>
     )
