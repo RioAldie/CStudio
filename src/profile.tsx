@@ -1,5 +1,6 @@
 import { Box, CssBaseline, PaletteMode, Stack } from "@mui/material";
 import Navbar from "./component/navbar";
+import ProfileContent from "./component/profile-content";
 import Settings from "./component/setting";
 
 interface ProfileProps{
@@ -17,9 +18,7 @@ export default function Profile(props: ProfileProps){
             <Box>
                 <Stack justifyContent="space-between" direction="row" spacing={2} p={4}>
                     <Settings />
-                    <Box flex={3} bgcolor={'red'} height={1000}>
-                        Profile
-                    </Box>
+                   <ProfileContent />
                 </Stack>
             </Box>
         </>

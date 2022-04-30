@@ -19,7 +19,7 @@ export default function Settings(){
     setOpen(!open);
   };
     return(
-        <Box flex={1}  >
+        <Box flex={1}  sx={{display:{xs: 'none', sm: 'block'}}}>
             <Box position={'fixed'} textAlign={'center'}>
                 <Typography variant="h5" fontWeight={'bold'}>
                     Settings
