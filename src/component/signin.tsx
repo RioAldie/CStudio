@@ -2,6 +2,7 @@ import { Box, Button, Modal, styled, TextField, Typography } from "@mui/material
 import { useState } from "react";
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import SignupForm from "./signup-form";
+import { Link } from "react-router-dom";
 
 const StyledModal = styled(Modal)({
     display: 'flex',
@@ -43,6 +44,11 @@ export default function SignIn(){
                 variant="outlined"
                 />
                 <Button sx={{height: 50}} variant="contained" size="large">Sign In</Button>
+                <Typography variant="subtitle1">Did't Have an Account? 
+                <Link to={"/Signup"}>
+                {' Sign Up'}
+                </Link>
+                </Typography>
             </Box>
         </StyledModal></>
     )
