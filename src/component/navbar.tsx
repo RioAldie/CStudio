@@ -67,7 +67,6 @@ export default function Navbar (props: NavProps){
                
                 <NavList>
                    
-
                 </NavList>
                 <NavBox>
                <Switch
