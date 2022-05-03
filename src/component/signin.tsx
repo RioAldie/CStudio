@@ -1,17 +1,44 @@
-import { Box, Button, Modal, styled, TextField, Typography } from "@mui/material";
+import { Alert, Box, Button, Modal, Stack, styled, TextField, Typography } from "@mui/material";
 import { useState } from "react";
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
-import SignupForm from "./signup-form";
-import { Link } from "react-router-dom";
+import { signInWithEmailAndPassword } from "firebase/auth";
+import { auth } from "../firebase/firebase";
+import { Link, useNavigate } from "react-router-dom";
 
 const StyledModal = styled(Modal)({
     display: 'flex',
     alignItems:'center',
     justifyContent: 'center'
 });
-export default function SignIn(){
+interface SignInProps{
+    isLogin: Boolean,
+    setIsLogin: React.Dispatch<React.SetStateAction<boolean>>
+}
 
+export default function SignIn(props:SignInProps){
     const [open, setOpen] = useState(false);
+    const [err, setErr] = useState(false);
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+    const navigate = useNavigate();
+    const {isLogin, setIsLogin} = props;
+
+    const handleLogin = ()=>{
+        signInWithEmailAndPassword(auth, email, password)
+        .then((userCredential) => {
+            // Signed in 
+            setErr(false)
+            const user = userCredential.user;
+            setOpen(false);
+            setIsLogin(true);
+        })
+        .catch((error) => {
+            const errorCode = error.code;
+            const errorMessage = error.message;
+            setErr(true);
+            // ..
+        });
+    }
     return(
         <>
         <Button variant="contained" onClick={(e)=> setOpen(true)}> <AccountCircleIcon/> Login </Button>
@@ -22,7 +49,8 @@ export default function SignIn(){
             aria-labelledby="modal-modal-title"
             aria-describedby="modal-modal-description"
             >
-            <Box width={500} height={320} bgcolor={"background.default"} color={"text.primary"} p={3} borderRadius={3} textAlign={"center"} sx={{display: 'flex',flexDirection: 'column', justifyContent:'space-evenly'}}>
+                
+            <Box width={500} height={400} bgcolor={"background.default"} color={"text.primary"} p={3} borderRadius={3} textAlign={"center"} sx={{display: 'flex',flexDirection: 'column', justifyContent:'space-evenly'}}>
                 <Typography variant="h5">
                     Welcome Back!
                 </Typography>
@@ -34,7 +62,8 @@ export default function SignIn(){
                 id="email" 
                 label="Email" 
                 type="email"
-                variant="outlined" />
+                variant="outlined"
+                onChange={(e)=> setEmail(e.target.value)} />
                 <TextField
                 fullWidth
                 id="outlined-basic"
@@ -42,14 +71,23 @@ export default function SignIn(){
                 type="password"
                 autoComplete="current-password"
                 variant="outlined"
+                onChange={(e)=> setPassword(e.target.value)}
                 />
-                <Button sx={{height: 50}} variant="contained" size="large">Sign In</Button>
+                <Button sx={{height: 50}} variant="contained" size="large" onClick={handleLogin}>Sign In</Button>
                 <Typography variant="subtitle1">Did't Have an Account? 
                 <Link to={"/Signup"}>
                 {' Sign Up'}
                 </Link>
                 </Typography>
+                {   err && 
+                    <Stack sx={{ width: '100%' }}>
+                    <Alert severity="error">Password or Email is Wrong</Alert>  
+                    </Stack>
+                }
+                
+                
             </Box>
+           
         </StyledModal></>
     )
 }

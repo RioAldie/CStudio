@@ -40,8 +40,22 @@ interface NavProps{
 export default function Navbar (props: NavProps){
     const [open, setOpen] = useState(false);
     const [checked, setChecked] = useState(false);
-   
+    const [isLogin, setIsLogin] = useState(false);
+    useEffect(()=>{
+        console.log('login', isLogin)
+    })
     const { mode, setMode} = props;
+    const handleButton = () =>{
+        if(isLogin === true){
+            return(
+                <Button variant="contained" onClick={(e)=> { setIsLogin(false)}}> <AccountCircleIcon/> Logout </Button>
+            )
+        }else{
+            return(
+                <SignIn isLogin={isLogin} setIsLogin={setIsLogin}/>
+            )
+        }
+    }
     return(
         <>
         <AppBar position="sticky" color="primary">
@@ -64,7 +78,7 @@ export default function Navbar (props: NavProps){
                 color="primary"
                 />
                 <Box sx={{display:{xs: 'none',sm: 'block'}}}>
-                     <SignIn />
+                     {handleButton()}
                 </Box>
                
                 <MenuIcon sx={{display:{ xs: 'block', sm:'block', md:'none'}}} onClick={(e) =>setOpen(true)}/>
@@ -86,7 +100,7 @@ export default function Navbar (props: NavProps){
                     <MenuItem >Katalog</MenuItem>
                     <MenuItem >About</MenuItem>
                     <MenuItem >Contact</MenuItem>
-                    <MenuItem ><SignIn/></MenuItem>
+                    <MenuItem >{handleButton()}</MenuItem>
                 </Menu>
                </NavBox>
             </StyledToolbar>

@@ -1,4 +1,4 @@
-import { Avatar, Box,Card,CardActions,CardContent,CardHeader,CardMedia,Checkbox,Collapse,IconButton,styled,Typography } from "@mui/material";
+import { Alert, Avatar, Box,Card,CardActions,CardContent,CardHeader,CardMedia,Checkbox,Collapse,IconButton,Stack,styled,Typography } from "@mui/material";
 import Post from "./post";
 const Feed = () =>{
 
@@ -13,6 +13,7 @@ const Feed = () =>{
     return(
         <>
         <Box flex={4} p={2} justifyContent="center" alignItems="center">
+      
             <PostContainer >
                 <Post name="Alexandra Mitrova" image="/image/david-clode-uTj6-eZeHto-unsplash.jpg" date="September 14, 2016" avatar="/image/avatar-1.png"/>
                 <Post name="Teressa Rogers" image="/image/alvan-nee-ZCHj_2lJP00-unsplash.jpg" date="January 19, 2022" avatar="/image/avatar-5.png"/>
