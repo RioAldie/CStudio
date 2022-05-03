@@ -1,5 +1,5 @@
 import { createTheme, PaletteMode, ThemeProvider } from "@mui/material";
-import { ReactNode, useState } from "react";
+import { ReactNode, useEffect, useState } from "react";
 import {
   BrowserRouter as Router,
   Route,
@@ -14,6 +14,7 @@ import SignUp from "./signup";
 
 export default function App() {
   const [mode, setMode] = useState<PaletteMode>('light'); 
+  const [isLogin, setIsLogin] = useState<boolean>(false);
   const DarkTheme = createTheme({
       palette:{
           mode: mode,
@@ -25,19 +26,23 @@ export default function App() {
   interface childrenProps{
     children: ReactNode;
   } 
- const currentUser = false;
+
  const RequireAuth = ({ children }: childrenProps): any =>{
-   return currentUser ? children : <Navigate to={"/"}/>
+   return isLogin ? children : <Navigate to={"/"}/>
  }
+
+ useEffect(()=>{
+    console.log('User Login: ', isLogin )
+ },[isLogin])
   return (
     <BrowserRouter>
     <ThemeProvider  theme={DarkTheme}>
       <Routes>
-        <Route path="/" element={<Home mode={mode} setMode={setMode} />} />
+        <Route path="/" element={<Home mode={mode} setMode={setMode} isLogin={isLogin} setIsLogin={setIsLogin} />} />
         <Route path="/Signup" element={<SignUp/>} />
         <Route path="/Profile" element={
           <RequireAuth>
-            <Profile mode={mode} setMode={setMode}/>
+            <Profile mode={mode} setMode={setMode} isLogin={isLogin} setIsLogin={setIsLogin}/>
           </RequireAuth>
         
         }/>

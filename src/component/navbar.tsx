@@ -35,16 +35,18 @@ const NavList = styled("div")(({theme}) =>({
 interface NavProps{
     mode: PaletteMode,
     setMode: React.Dispatch<React.SetStateAction<PaletteMode>>,
+    isLogin: boolean,
+    setIsLogin: React.Dispatch<React.SetStateAction<boolean>>
 }
 
 export default function Navbar (props: NavProps){
     const [open, setOpen] = useState(false);
     const [checked, setChecked] = useState(false);
-    const [isLogin, setIsLogin] = useState(false);
+    
     useEffect(()=>{
         console.log('login', isLogin)
     })
-    const { mode, setMode} = props;
+    const { mode, setMode, isLogin, setIsLogin} = props;
     const handleButton = () =>{
         if(isLogin === true){
             return(

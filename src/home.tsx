@@ -4,16 +4,19 @@ import RightBar from './component/rightbar';
 import Navbar from './component/navbar';
 import Sidebar from './component/sidebar';
 import Add from './component/add';
+import React from 'react';
 
 
 interface HomeProps{
     mode: PaletteMode,
     setMode: React.Dispatch<React.SetStateAction<PaletteMode>>,
+    isLogin: boolean,
+    setIsLogin: React.Dispatch<React.SetStateAction<boolean>>
 }
 export default function Home (props: HomeProps) {
 
 
-const { mode, setMode} = props; 
+const { mode, setMode, isLogin, setIsLogin} = props; 
 const DarkTheme = createTheme({
     palette:{
        mode: mode,
@@ -26,7 +29,7 @@ const DarkTheme = createTheme({
       <><CssBaseline />
       <ThemeProvider theme={DarkTheme}>
         <Box bgcolor={"background.default"} color={"text.primary"}>
-          <Navbar setMode={setMode} mode={mode}  />
+          <Navbar setMode={setMode} mode={mode} isLogin={isLogin} setIsLogin={setIsLogin}  />
           <Box>
             <Stack justifyContent="space-evenly" direction="row" spacing={2}>
               <Sidebar />
