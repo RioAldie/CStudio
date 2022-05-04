@@ -7,16 +7,17 @@ interface ProfileProps{
     mode: PaletteMode,
     setMode: React.Dispatch<React.SetStateAction<PaletteMode>>,
     setIsLogin: React.Dispatch<React.SetStateAction<boolean>>,
-    isLogin: boolean
+    setUserid: React.Dispatch<React.SetStateAction<String>>,
+    isLogin: boolean,
 }
 
 export default function Profile(props: ProfileProps){
-   const {mode, setMode,setIsLogin} = props;
+   const {mode, setMode,setIsLogin, setUserid, isLogin} = props;
    
     return(
         <>
             <CssBaseline/>
-            <Navbar setMode={setMode} mode={mode} isLogin={false} setIsLogin={setIsLogin}  />
+            <Navbar setMode={setMode} mode={mode} isLogin={false} setIsLogin={setIsLogin} setUserid={setUserid} />
             <Box>
                 <Stack justifyContent="space-between" direction="row" spacing={2} p={4}>
                     <Settings />

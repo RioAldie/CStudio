@@ -1,5 +1,5 @@
 import { Alert, Box, Button, Modal, Stack, styled, TextField, Typography } from "@mui/material";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../firebase/firebase";
@@ -12,16 +12,18 @@ const StyledModal = styled(Modal)({
 });
 interface SignInProps{
     isLogin: Boolean,
-    setIsLogin: React.Dispatch<React.SetStateAction<boolean>>
+    setIsLogin: React.Dispatch<React.SetStateAction<boolean>>,
+    setUserid: React.Dispatch<React.SetStateAction<String>>
 }
 
 export default function SignIn(props:SignInProps){
     const [open, setOpen] = useState(false);
     const [err, setErr] = useState(false);
     const [email, setEmail] = useState("");
+    const [userform, setUserform] = useState<string>();
     const [password, setPassword] = useState("");
     const navigate = useNavigate();
-    const {isLogin, setIsLogin} = props;
+    const {isLogin, setIsLogin, setUserid} = props;
 
     const handleLogin = ()=>{
         signInWithEmailAndPassword(auth, email, password)
@@ -29,6 +31,11 @@ export default function SignIn(props:SignInProps){
             // Signed in 
             setErr(false)
             const user = userCredential.user;
+            console.log(user)
+            const userid = user.uid
+            setUserform(user.uid);
+            console.log(userform)
+            setUserid(userid.toString());
             setOpen(false);
             setIsLogin(true);
         })

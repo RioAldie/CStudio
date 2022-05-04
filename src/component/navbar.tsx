@@ -5,6 +5,7 @@ import MenuIcon from '@mui/icons-material/Menu';
 import React, { Dispatch, DispatchWithoutAction, SetStateAction, useEffect, useState } from "react";
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import SignIn from "./signin";
+import { setUserId } from "firebase/analytics";
 
 
 const StyledToolbar = styled(Toolbar)({
@@ -36,7 +37,8 @@ interface NavProps{
     mode: PaletteMode,
     setMode: React.Dispatch<React.SetStateAction<PaletteMode>>,
     isLogin: boolean,
-    setIsLogin: React.Dispatch<React.SetStateAction<boolean>>
+    setIsLogin: React.Dispatch<React.SetStateAction<boolean>>,
+    setUserid: React.Dispatch<React.SetStateAction<String>>
 }
 
 export default function Navbar (props: NavProps){
@@ -46,7 +48,7 @@ export default function Navbar (props: NavProps){
     useEffect(()=>{
         console.log('login', isLogin)
     })
-    const { mode, setMode, isLogin, setIsLogin} = props;
+    const { mode, setMode, isLogin, setIsLogin, setUserid} = props;
     const handleButton = () =>{
         if(isLogin === true){
             return(
@@ -54,7 +56,7 @@ export default function Navbar (props: NavProps){
             )
         }else{
             return(
-                <SignIn isLogin={isLogin} setIsLogin={setIsLogin}/>
+                <SignIn isLogin={isLogin} setIsLogin={setIsLogin} setUserid={setUserid} />
             )
         }
     }

@@ -11,12 +11,13 @@ interface HomeProps{
     mode: PaletteMode,
     setMode: React.Dispatch<React.SetStateAction<PaletteMode>>,
     isLogin: boolean,
-    setIsLogin: React.Dispatch<React.SetStateAction<boolean>>
+    setIsLogin: React.Dispatch<React.SetStateAction<boolean>>,
+    setUserid: React.Dispatch<React.SetStateAction<String>>
 }
 export default function Home (props: HomeProps) {
 
 
-const { mode, setMode, isLogin, setIsLogin} = props; 
+const { mode, setMode, isLogin, setIsLogin,setUserid} = props; 
 const DarkTheme = createTheme({
     palette:{
        mode: mode,
@@ -29,7 +30,7 @@ const DarkTheme = createTheme({
       <><CssBaseline />
       <ThemeProvider theme={DarkTheme}>
         <Box bgcolor={"background.default"} color={"text.primary"}>
-          <Navbar setMode={setMode} mode={mode} isLogin={isLogin} setIsLogin={setIsLogin}  />
+          <Navbar setMode={setMode} mode={mode} isLogin={isLogin} setIsLogin={setIsLogin} setUserid={setUserid}  />
           <Box>
             <Stack justifyContent="space-evenly" direction="row" spacing={2}>
               <Sidebar />
