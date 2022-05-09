@@ -1,9 +1,9 @@
-import { Avatar, Box, styled, TextField, Typography } from "@mui/material";
+import { Avatar, Box, Button, styled, TextField, Typography } from "@mui/material";
 import MiniPost from "./mini-post";
 
 const BoxStyled = styled(Box)({
     width: "100%",
-    height: 250,
+    height: 450,
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center'
@@ -37,10 +37,16 @@ const BoxName = styled("div")(({theme}) =>({
 export default function ProfileContent(){
     return(
         <Box flex={3}  height={1000}>
-            <BoxStyled>
+            <BoxStyled sx={{display: 'flex', flexDirection: 'column'}}>
             <Avatar alt="Remy Sharp" src={`/image/avatar-1.png`} 
             sx={{ width: 150, height: 150 }}
             />
+                    <Typography variant="h6" fontWeight={"normal"}>
+                        Shen Dong
+                    </Typography>
+                    <Typography variant="h6" fontWeight={"light"} color={'gray'}>
+                        shendong@gmail.com
+                    </Typography>
             </BoxStyled>
             <Typography variant="h5" fontWeight={"bold"}>
                         Profile
@@ -107,6 +113,14 @@ export default function ProfileContent(){
                     </Box>
                     
                 </BoxDetail>
+                <BoxDetail>
+                    <Box sx={{display: 'flex', flexDirection: 'row', width: '100%', justifyContent: 'flex-end'}}>
+                        <Button variant="contained" sx={{marginRight: 5}}>Save</Button>
+                        <Button variant="outlined">Cancel</Button>
+                    </Box>
+                    
+                </BoxDetail>
+                
             </BoxDetails>
             <Typography variant="h5" fontWeight={"bold"} color={'gray'}>
                         Lasted Post

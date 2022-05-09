@@ -1,11 +1,12 @@
-import { AppBar, Box, styled, Toolbar, Typography, Menu, MenuItem , Button, PaletteMode} from "@mui/material";
+import { AppBar, Box, styled, Toolbar, Typography, Menu, MenuItem , Button, PaletteMode, Badge} from "@mui/material";
 import { PhotoCamera } from "@mui/icons-material";
 import Switch from '@mui/material/Switch';
 import MenuIcon from '@mui/icons-material/Menu';
 import React, { Dispatch, DispatchWithoutAction, SetStateAction, useEffect, useState } from "react";
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import SignIn from "./signin";
-import { setUserId } from "firebase/analytics";
+import MailIcon from '@mui/icons-material/Mail';
+import NotificationsIcon from '@mui/icons-material/Notifications';
 
 
 const StyledToolbar = styled(Toolbar)({
@@ -73,6 +74,12 @@ export default function Navbar (props: NavProps){
                    
                 </NavList>
                 <NavBox>
+                <Badge badgeContent={4} color="secondary" sx={{marginRight: 2}}>
+                    <MailIcon color="action" />
+                </Badge>
+                <Badge badgeContent={9} color="secondary" sx={{marginRight: 2}}>
+                    <NotificationsIcon color="action" />
+                </Badge>
                <Switch
                 checked={checked}
                 onChange={(e)=>setMode(mode === 'light' ? 'dark' : 'light')}
