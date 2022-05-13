@@ -12,7 +12,7 @@ interface ProfileProps{
 }
 
 export default function Profile(props: ProfileProps){
-   const {mode, setMode,setIsLogin, setUserid, isLogin} = props;
+   const {mode, setMode,setIsLogin, setUserid} = props;
    
     return(
         <>

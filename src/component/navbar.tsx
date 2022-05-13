@@ -7,6 +7,7 @@ import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import SignIn from "./signin";
 import MailIcon from '@mui/icons-material/Mail';
 import NotificationsIcon from '@mui/icons-material/Notifications';
+import ButtonSign from "./atoms/btnLogin";
 
 
 const StyledToolbar = styled(Toolbar)({
@@ -50,17 +51,17 @@ export default function Navbar (props: NavProps){
         console.log('login', isLogin)
     })
     const { mode, setMode, isLogin, setIsLogin, setUserid} = props;
-    const handleButton = () =>{
-        if(isLogin === true){
-            return(
-                <Button variant="contained" onClick={(e)=> { setIsLogin(false)}}> <AccountCircleIcon/> Logout </Button>
-            )
-        }else{
-            return(
-                <SignIn isLogin={isLogin} setIsLogin={setIsLogin} setUserid={setUserid} />
-            )
-        }
-    }
+    // const handleButton = () =>{
+    //     if(isLogin === true){
+    //         return(
+    //             <Button variant="contained" onClick={(e)=> { setIsLogin(false)}}> <AccountCircleIcon/> Logout </Button>
+    //         )
+    //     }else{
+    //         return(
+    //             <SignIn isLogin={isLogin} setIsLogin={setIsLogin} setUserid={setUserid} />
+    //         )
+    //     }
+    // }
     return(
         <>
         <AppBar position="sticky" color="primary">
@@ -88,7 +89,7 @@ export default function Navbar (props: NavProps){
                 color="primary"
                 />
                 <Box sx={{display:{xs: 'none',sm: 'block'}}}>
-                     {handleButton()}
+                    <ButtonSign/>
                 </Box>
                
                 <MenuIcon sx={{display:{ xs: 'block', sm:'block', md:'none'}}} onClick={(e) =>setOpen(true)}/>
@@ -110,7 +111,7 @@ export default function Navbar (props: NavProps){
                     <MenuItem >Katalog</MenuItem>
                     <MenuItem >About</MenuItem>
                     <MenuItem >Contact</MenuItem>
-                    <MenuItem >{handleButton()}</MenuItem>
+                    <MenuItem ><ButtonSign/></MenuItem>
                 </Menu>
                </NavBox>
             </StyledToolbar>

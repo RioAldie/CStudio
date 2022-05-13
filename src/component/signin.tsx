@@ -12,8 +12,6 @@ const StyledModal = styled(Modal)({
 });
 interface SignInProps{
     isLogin: Boolean,
-    setIsLogin: React.Dispatch<React.SetStateAction<boolean>>,
-    setUserid: React.Dispatch<React.SetStateAction<String>>
 }
 
 export default function SignIn(props:SignInProps){
@@ -23,7 +21,7 @@ export default function SignIn(props:SignInProps){
     const [userform, setUserform] = useState<string>();
     const [password, setPassword] = useState("");
     const navigate = useNavigate();
-    const {isLogin, setIsLogin, setUserid} = props;
+    const {isLogin} = props;
 
     const handleLogin = ()=>{
         signInWithEmailAndPassword(auth, email, password)
@@ -35,9 +33,8 @@ export default function SignIn(props:SignInProps){
             const userid = user.uid
             setUserform(user.uid);
             console.log(userform)
-            setUserid(userid.toString());
             setOpen(false);
-            setIsLogin(true);
+
         })
         .catch((error) => {
             const errorCode = error.code;
