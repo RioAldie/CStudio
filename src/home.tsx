@@ -4,8 +4,9 @@ import RightBar from './component/rightbar';
 import Navbar from './component/navbar';
 import Sidebar from './component/sidebar';
 import Add from './component/add';
-import React from 'react';
-import {AppContext} from './App';
+import React, { useContext, useEffect } from 'react';
+import { AppContext } from './context/AuthContext';
+
 
 
 interface HomeProps{
@@ -18,6 +19,8 @@ interface HomeProps{
 export default function Home (props: HomeProps) {
 
 // Context API
+const appContext = useContext(AppContext);
+
 const { mode, setMode, isLogin, setIsLogin,setUserid} = props; 
 const DarkTheme = createTheme({
     palette:{
@@ -30,7 +33,7 @@ const DarkTheme = createTheme({
     return(
       <><CssBaseline />
        
-          <ThemeProvider theme={DarkTheme}>
+          
             <Box bgcolor={"background.default"} color={"text.primary"}>
               <Navbar setMode={setMode} mode={mode} isLogin={isLogin} setIsLogin={setIsLogin} setUserid={setUserid}  />
               <Box>
@@ -42,7 +45,7 @@ const DarkTheme = createTheme({
                 <Add />
               </Box>
             </Box>
-          </ThemeProvider>
+        
         
           
       </>

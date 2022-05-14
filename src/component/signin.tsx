@@ -14,14 +14,14 @@ interface SignInProps{
     isLogin: Boolean,
 }
 
-export default function SignIn(props:SignInProps){
+export default function SignIn(){
     const [open, setOpen] = useState(false);
     const [err, setErr] = useState(false);
     const [email, setEmail] = useState("");
     const [userform, setUserform] = useState<string>();
     const [password, setPassword] = useState("");
     const navigate = useNavigate();
-    const {isLogin} = props;
+    
 
     const handleLogin = ()=>{
         signInWithEmailAndPassword(auth, email, password)

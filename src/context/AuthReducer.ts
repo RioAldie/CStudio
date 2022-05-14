@@ -1,23 +1,18 @@
 import { ReducerWithoutAction } from "react";
-
-interface AuthReducerProps{
-    payload: ReducerWithoutAction<any>,
-    state:  ReducerWithoutAction<any>,
-    type: String,
-    action: ReducerWithoutAction<any>,
-    currentUser: ReducerWithoutAction<any>
-}
-
-const AuthReducer = (state : ReducerWithoutAction<any>, action: AuthReducerProps)=>{
+import {initialState} from './AuthContext';
+type ACTIONTYPE =
+  | { type: "LOGIN"; payload: boolean }
+  | { type: "LOGOUT"; payload: boolean }
+const AuthReducer = (state : typeof initialState, action: ACTIONTYPE)=>{
     switch (action.type) {
         case "LOGIN":{
             return{
-                currentUser: action.payload,
+                isLogin: action.payload,
             };
         }
         case "LOGOUT":{
             return{
-                currentUser: action.payload
+                isLogin: action.payload,
             };
         }
         default:

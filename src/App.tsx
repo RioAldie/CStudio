@@ -1,6 +1,6 @@
 import { createTheme, PaletteMode, ThemeProvider } from "@mui/material";
 import { json } from "node:stream/consumers";
-import { ReactNode, useEffect, useState, createContext } from "react";
+import { ReactNode, useEffect, useState, createContext, useContext } from "react";
 import {
   BrowserRouter as Router,
   Route,
@@ -11,11 +11,10 @@ import {
 import Home from "./home";
 import Profile from "./profile";
 import SignUp from "./signup";
+import { AppContext, childrenProps } from "./context/AuthContext";
 
 
-export const AppContext = createContext({
-  isLogin: false
-});
+
 export default function App() {
   const [mode, setMode] = useState<PaletteMode>('light'); 
   const [isLogin, setIsLogin] = useState<boolean>(true);
@@ -28,29 +27,36 @@ export default function App() {
           }
       }
   })
-  interface childrenProps{
-    children: ReactNode
-  } 
+  const Dispatch = (action: string)=>{
+  
+    if(action === "SET_LOGIN"){
+      return setIsLogin(!isLogin);
+    }
+  }
+  const SampleContext: childrenProps = {
+    isLogin: false,
+  }
+
 
 
   
 
 
- function RequireAuth({ children }: childrenProps): any {
-    return isLogin ? children : <Navigate to={"/"} />;
-  }
+//  function RequireAuth({ children }: childrenProps): any {
+//     return isLogin ? children : <Navigate to={"/"} />;
+//   }
 
   return (
     <BrowserRouter>
-      <AppContext.Provider value={{isLogin: true}}>
+      <AppContext.Provider value={SampleContext}>
         <ThemeProvider  theme={DarkTheme}>
           <Routes>
             <Route path="/" element={<Home mode={mode} setMode={setMode} isLogin={isLogin} setIsLogin={setIsLogin} setUserid={setUserid}  />} />
             <Route path="/Signup" element={<SignUp/>} />
             <Route path="/Profile" element={
-              <RequireAuth>
+              
                 <Profile mode={mode} setMode={setMode} isLogin={isLogin} setIsLogin={setIsLogin} setUserid={setUserid} />
-              </RequireAuth>
+              
             
             }/>
           </Routes>
@@ -60,6 +66,3 @@ export default function App() {
   );
 }
 
-function user(user: any): string {
-  throw new Error("Function not implemented.");
-}
