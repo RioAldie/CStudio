@@ -2,12 +2,16 @@ import { AppBar, Box, styled, Toolbar, Typography, Menu, MenuItem , Button, Pale
 import { PhotoCamera } from "@mui/icons-material";
 import Switch from '@mui/material/Switch';
 import MenuIcon from '@mui/icons-material/Menu';
-import React, { Dispatch, DispatchWithoutAction, SetStateAction, useEffect, useState } from "react";
+import React, { Dispatch, DispatchWithoutAction, SetStateAction, useContext, useEffect, useMemo, useReducer, useState } from "react";
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import SignIn from "./signin";
 import MailIcon from '@mui/icons-material/Mail';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import ButtonSign from "./atoms/btnLogin";
+import { AppContext } from "../context/AuthContext";
+import ThemeReducer from "../context/ThemeReducer";
+import { ThemeCtx, THEME_STATE } from "../context/ThemeContext";
+
 
 
 const StyledToolbar = styled(Toolbar)({
@@ -38,30 +42,16 @@ const NavList = styled("div")(({theme}) =>({
 interface NavProps{
     mode: PaletteMode,
     setMode: React.Dispatch<React.SetStateAction<PaletteMode>>,
-    isLogin: boolean,
-    setIsLogin: React.Dispatch<React.SetStateAction<boolean>>,
-    setUserid: React.Dispatch<React.SetStateAction<String>>
 }
 
-export default function Navbar (props: NavProps){
+export default function Navbar (){
     const [open, setOpen] = useState(false);
     const [checked, setChecked] = useState(false);
+    // const [mode, setMode] = useState<PaletteMode>();
+    // const [state ,dispatch] = useReducer(ThemeReducer, THEME_STATE)
+    const { mode, setMode} = useContext(ThemeCtx);
     
-    useEffect(()=>{
-        console.log('login', isLogin)
-    })
-    const { mode, setMode, isLogin, setIsLogin, setUserid} = props;
-    // const handleButton = () =>{
-    //     if(isLogin === true){
-    //         return(
-    //             <Button variant="contained" onClick={(e)=> { setIsLogin(false)}}> <AccountCircleIcon/> Logout </Button>
-    //         )
-    //     }else{
-    //         return(
-    //             <SignIn isLogin={isLogin} setIsLogin={setIsLogin} setUserid={setUserid} />
-    //         )
-    //     }
-    // }
+    
     return(
         <>
         <AppBar position="sticky" color="primary">
@@ -83,7 +73,7 @@ export default function Navbar (props: NavProps){
                 </Badge>
                <Switch
                 checked={checked}
-                onChange={(e)=>setMode(mode === 'light' ? 'dark' : 'light')}
+                onChange={(e)=>setMode(mode === true ? false : true)}
                 onClick={(e)=>setChecked(!checked)}
                 inputProps={{ 'aria-label': 'controlled' }}
                 color="primary"

@@ -1,6 +1,6 @@
 import { createTheme, PaletteMode, ThemeProvider } from "@mui/material";
 import { json } from "node:stream/consumers";
-import { ReactNode, useEffect, useState, createContext, useContext } from "react";
+import { ReactNode, useEffect, useState, createContext, useContext, useReducer } from "react";
 import {
   BrowserRouter as Router,
   Route,
@@ -14,54 +14,41 @@ import SignUp from "./signup";
 import { AppContext, childrenProps } from "./context/AuthContext";
 
 
+import ThemeReducer from "./context/ThemeReducer";
+import ThemeContextProvider from "./context/ThemeContext";
 
+export const SampleContext: childrenProps = {
+  isLogin: false,
+  mode: 'dark'
+}
 export default function App() {
-  const [mode, setMode] = useState<PaletteMode>('light'); 
-  const [isLogin, setIsLogin] = useState<boolean>(true);
-  const [userid, setUserid] = useState<String>("");
-  const DarkTheme = createTheme({
-      palette:{
-          mode: mode,
-          primary: {
-            main: '#FF5F00'
-          }
-      }
-  })
-  const Dispatch = (action: string)=>{
-  
-    if(action === "SET_LOGIN"){
-      return setIsLogin(!isLogin);
-    }
-  }
-  const SampleContext: childrenProps = {
-    isLogin: false,
-  }
-
-
 
   
-
+  
 
 //  function RequireAuth({ children }: childrenProps): any {
 //     return isLogin ? children : <Navigate to={"/"} />;
 //   }
+ 
 
   return (
     <BrowserRouter>
-      <AppContext.Provider value={SampleContext}>
-        <ThemeProvider  theme={DarkTheme}>
+    
+
+        <ThemeContextProvider>
           <Routes>
-            <Route path="/" element={<Home mode={mode} setMode={setMode} isLogin={isLogin} setIsLogin={setIsLogin} setUserid={setUserid}  />} />
+            <Route path="/" element={<Home />} />
             <Route path="/Signup" element={<SignUp/>} />
             <Route path="/Profile" element={
               
-                <Profile mode={mode} setMode={setMode} isLogin={isLogin} setIsLogin={setIsLogin} setUserid={setUserid} />
+                <Profile />
               
             
             }/>
           </Routes>
-        </ThemeProvider>
-      </AppContext.Provider>
+        </ThemeContextProvider>
+     
+      
   </BrowserRouter>
   );
 }

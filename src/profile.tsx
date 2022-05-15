@@ -11,13 +11,13 @@ interface ProfileProps{
     isLogin: boolean,
 }
 
-export default function Profile(props: ProfileProps){
-   const {mode, setMode,setIsLogin, setUserid} = props;
+export default function Profile(){
+   
    
     return(
         <>
             <CssBaseline/>
-            <Navbar setMode={setMode} mode={mode} isLogin={false} setIsLogin={setIsLogin} setUserid={setUserid} />
+            {/* <Navbar setMode={setMode} mode={mode} isLogin={false} setIsLogin={setIsLogin} setUserid={setUserid} /> */}
             <Box>
                 <Stack justifyContent="space-between" direction="row" spacing={2} p={4}>
                     <Settings />
