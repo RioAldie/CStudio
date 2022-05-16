@@ -9,6 +9,7 @@ import MailIcon from '@mui/icons-material/Mail';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import ButtonSign from "./atoms/btnLogin";
 import ThemeReducer from "../context/ThemeReducer";
+import { Link } from "react-router-dom";
 import { ThemeCtx, THEME_STATE } from "../context/ThemeContext";
 
 
@@ -37,7 +38,7 @@ const NavList = styled("div")(({theme}) =>({
     [theme.breakpoints.up("md")]:{
         display: "flex"
     }
-}))
+}));
 interface NavProps{
     mode: PaletteMode,
     setMode: React.Dispatch<React.SetStateAction<PaletteMode>>,
@@ -55,10 +56,13 @@ export default function Navbar (){
         <>
         <AppBar position="sticky" color="primary">
             <StyledToolbar>
-                <NavBox>
+                <Link to={'/'}>
+                <NavBox sx={{ color: 'white'}}>
                     <PhotoCamera/>
-                    <Typography variant="h6" sx={{display:{ xs: 'none', sm:'block'}}}>CStudio</Typography>
+                    <Typography variant="h6" sx={{display:{ xs: 'none', sm:'block', textDecoration: 'none'}}}>CStudio</Typography>
                 </NavBox>
+                </Link>
+                
                
                 <NavList>
                    

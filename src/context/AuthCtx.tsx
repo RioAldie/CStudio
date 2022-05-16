@@ -15,7 +15,7 @@ type AuthContextValue={
     setIslogin: React.Dispatch<React.SetStateAction<boolean>>
 }
 const AuthCtxdeafultvalue:AuthContextValue = {
-    isLogin: true,
+    isLogin: false,
     setIslogin: state => {}
 }
 
@@ -23,7 +23,14 @@ const AuthCtxdeafultvalue:AuthContextValue = {
 export const AuthCtx = createContext(AuthCtxdeafultvalue);
 
 const AuthContextProvider = ({children}: AuthProps) =>{
-    const [isLogin, setIslogin] = useState(AuthCtxdeafultvalue.isLogin)
+    const [isLogin, setIslogin] = useState(AuthCtxdeafultvalue.isLogin);
+    const CurrentUserLclStorage = localStorage.getItem("user");
+    useEffect(()=>{
+        // console.log(CurrentUserLclStorage)
+        if(CurrentUserLclStorage != null){
+            setIslogin(true);
+        }
+    },[CurrentUserLclStorage,setIslogin])
     return(
         <AuthCtx.Provider value={{isLogin, setIslogin}}>
             {children}

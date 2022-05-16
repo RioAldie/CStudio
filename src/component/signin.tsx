@@ -30,10 +30,13 @@ export default function SignIn(){
             // Signed in 
             setErr(false)
             const user = userCredential.user;
-            console.log(user)
-            const userid = user.uid
-            setUserform(user.uid);
+            const userf= {
+                uid: user.uid,
+                email: user.email
+            }
+            console.log(userf)
             setOpen(false);
+            setLocalStr(userf);
             setIslogin(true)
         })
         .catch((error) => {
@@ -43,6 +46,11 @@ export default function SignIn(){
             
             // ..
         });
+    }
+    const setLocalStr = (user:Object) =>{
+        return(
+            localStorage.setItem("user", JSON.stringify(user))
+        )
     }
     return(
         <>

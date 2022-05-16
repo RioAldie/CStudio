@@ -11,6 +11,7 @@ import {
 import Home from "./home";
 import Profile from "./profile";
 import SignUp from "./signup";
+import './style/Global.css';
 
 
 
