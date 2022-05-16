@@ -1,11 +1,11 @@
 import { Alert, Box, Button, Modal, Stack, styled, TextField, Typography } from "@mui/material";
-import { useEffect, useReducer, useState } from "react";
+import { useContext, useEffect, useReducer, useState } from "react";
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../firebase/firebase";
 import { Link, useNavigate } from "react-router-dom";
 import AuthReducer from "../context/AuthReducer";
-import { AppContext, initialState } from "../context/AuthContext";
+import { AuthCtx } from "../context/AuthCtx";
 const StyledModal = styled(Modal)({
     display: 'flex',
     alignItems:'center',
@@ -21,8 +21,8 @@ export default function SignIn(){
     const [email, setEmail] = useState("");
     const [userform, setUserform] = useState<string>();
     const [password, setPassword] = useState("");
-    const [, dispatch] = useReducer(AuthReducer, initialState);
     const navigate = useNavigate();
+    const { isLogin,setIslogin } = useContext(AuthCtx)
     
     const handleLogin = ()=>{
         signInWithEmailAndPassword(auth, email, password)
@@ -34,10 +34,7 @@ export default function SignIn(){
             const userid = user.uid
             setUserform(user.uid);
             setOpen(false);
-            dispatch({
-                type: 'LOGIN',
-                payload: true
-            })
+            setIslogin(true)
         })
         .catch((error) => {
             const errorCode = error.code;

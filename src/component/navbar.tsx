@@ -8,7 +8,6 @@ import SignIn from "./signin";
 import MailIcon from '@mui/icons-material/Mail';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import ButtonSign from "./atoms/btnLogin";
-import { AppContext } from "../context/AuthContext";
 import ThemeReducer from "../context/ThemeReducer";
 import { ThemeCtx, THEME_STATE } from "../context/ThemeContext";
 
@@ -72,7 +71,7 @@ export default function Navbar (){
                     <NotificationsIcon color="action" />
                 </Badge>
                <Switch
-                checked={checked}
+                checked={mode}
                 onChange={(e)=>setMode(mode === true ? false : true)}
                 onClick={(e)=>setChecked(!checked)}
                 inputProps={{ 'aria-label': 'controlled' }}

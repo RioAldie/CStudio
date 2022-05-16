@@ -1,6 +1,5 @@
 import { PaletteMode } from "@mui/material";
 import { useEffect } from "react";
-import {SampleContext} from '../App';
 import { THEME_STATE } from "./ThemeContext";
 
 type ACTIONTYPE =

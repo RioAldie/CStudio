@@ -21,38 +21,38 @@ export default function Home () {
 // Context API
 
 // const [stateLogin,] =  useReducer(AuthReducer, initialState);
- const [theme, setTheme] = useState<PaletteMode>('dark');
-const { mode, setMode} = useContext(ThemeCtx);
-// const modeCtx = appContext.mode;
-const DarkTheme = createTheme({
-  palette:{
-      mode: theme,
-      primary: {
-        main: '#FF5F00'
-      }
-  }
-})
-const handleTheme = () =>{
-    if(!mode){
-      // setTheme(theme === 'light' ? 'dark' : 'light');
-      setTheme('light')
-    }
-    if(mode){
-      setTheme('dark')
-    }
-}
-useEffect(()=>{
+//  const [theme, setTheme] = useState<PaletteMode>('dark');
+// const { mode, setMode} = useContext(ThemeCtx);
+// // const modeCtx = appContext.mode;
+// const DarkTheme = createTheme({
+//   palette:{
+//       mode: theme,
+//       primary: {
+//         main: '#FF5F00'
+//       }
+//   }
+// })
+// const handleTheme = () =>{
+//     if(!mode){
+//       // setTheme(theme === 'light' ? 'dark' : 'light');
+//       setTheme('light')
+//     }
+//     if(mode){
+//       setTheme('dark')
+//     }
+// }
+// useEffect(()=>{
   
-  // setInterval(()=>{
-  //   setMode(!mode);
-  // },1500)
-  handleTheme()
-},[setMode, mode, handleTheme])
+//   // setInterval(()=>{
+//   //   setMode(!mode);
+//   // },1500)
+//   handleTheme()
+// },[setMode, mode, handleTheme])
 
 
     return(
       <><CssBaseline />
-          <ThemeProvider theme={DarkTheme}>
+          {/* <ThemeProvider theme={DarkTheme}> */}
 
           
             <Box bgcolor={"background.default"} color={"text.primary"}>
@@ -66,7 +66,7 @@ useEffect(()=>{
                 <Add />
               </Box>
             </Box>
-        </ThemeProvider>
+        {/* </ThemeProvider> */}
         
           
       </>
