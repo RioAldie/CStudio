@@ -98,7 +98,7 @@ export default function Add(){
                     <TextField fullWidth label="Caption" id="fullWidth" />
                         </StyledUpload>
                     <StyledUpload>
-                        <Upload/>
+                        <Upload setOpen={setOpen}/>
                     </StyledUpload>
                 
                     
