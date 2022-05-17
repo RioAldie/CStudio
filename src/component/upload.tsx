@@ -4,9 +4,9 @@ import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
 import PhotoCamera from '@mui/icons-material/PhotoCamera';
 import Stack from '@mui/material/Stack';
-import { doc, setDoc } from 'firebase/firestore';
+import { addDoc, collection, doc, serverTimestamp, setDoc } from 'firebase/firestore';
 import { db } from '../firebase/firebase';
-import React from 'react';
+import React, { useState } from 'react';
 
 const Input = styled('input')({
   display: 'none',
@@ -16,15 +16,22 @@ interface uploadProps{
 }
 
 export default function Upload(props: uploadProps) {
+  const [caption, setCaption] = useState();
+  const [photo, setPhoto] =  useState();
   const {setOpen} = props;
   const handleSetData = async ()=>{
-    await setDoc(doc(db, "cities", "LA"), {
-      name: "Surabaya",
+    try {
+       const res =  await addDoc(collection(db, "cities"), {
+      name: "Kediri",
       state: "East Java",
-      country: "Indonesia"
+      country: "Indonesia",
+      timeStamp: serverTimestamp()
     });
     setOpen(false);
-    console.log("set sucsess")
+    } catch (error) {
+      console.log(error);    
+    }
+  
   }
   return (
     <Stack direction="row" alignItems="center" spacing={2}>
@@ -42,7 +49,7 @@ export default function Upload(props: uploadProps) {
         </IconButton>
       </label> 
       <label htmlFor="">
-        <Button variant="contained" component="span" onClick={()=> handleSetData()}>
+        <Button variant="contained" component="span" >
           Upload
         </Button>
       </label>

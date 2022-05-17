@@ -1,4 +1,6 @@
 import { Avatar, Box, Button, styled, TextField, Typography } from "@mui/material";
+import { useContext, useEffect, useState } from "react";
+import { UserContext } from "../context/UserContext";
 import MiniPost from "./mini-post";
 
 const BoxStyled = styled(Box)({
@@ -34,7 +36,26 @@ const BoxName = styled("div")(({theme}) =>({
         height: '100px'
     }
 }))
+
 export default function ProfileContent(){
+    const [firstname, setFirstname] = useState('');
+    const [lastname, setLastname] = useState('');
+    const [email, setEmail] = useState('');
+    const [title, setTitle] = useState('');
+    const users = useContext(UserContext);
+    const handleFormdata = () =>{
+        const profile={
+            firstname: firstname,
+            lastname: lastname,
+            email: email,
+            title: title
+        }
+        
+        console.log(profile);
+    }
+    useEffect(()=>{
+        console.log(users)
+    },[users])
     return(
         <Box flex={3}  height={1000}>
             <BoxStyled sx={{display: 'flex', flexDirection: 'column'}}>
@@ -61,11 +82,13 @@ export default function ProfileContent(){
                     id="outlined-required"
                     label="firstname"
                     defaultValue="Alexandra"
+                    onChange={(e)=>setFirstname(e.target.value)}
                     />
                      <TextField
                     id="outlined-required"
                     label="lastname"
                     defaultValue="Dodo"
+                    onChange={(e)=>setLastname(e.target.value)}
                     />
                     </BoxName>
                    
@@ -80,6 +103,7 @@ export default function ProfileContent(){
                     id="outlined-required"
                     label="email"
                     defaultValue="Alexandra@gmail.com"
+                    onChange={(e)=>setEmail(e.target.value)}
                     /> 
                     </Box>
                     
@@ -109,13 +133,14 @@ export default function ProfileContent(){
                     id="outlined-required"
                     label="title"
                     defaultValue="Reptiled Master"
+                    onChange={(e)=>setTitle(e.target.value)}
                     />
                     </Box>
                     
                 </BoxDetail>
                 <BoxDetail>
                     <Box sx={{display: 'flex', flexDirection: 'row', width: '100%', justifyContent: 'flex-end'}}>
-                        <Button variant="contained" sx={{marginRight: 5}}>Save</Button>
+                        <Button variant="contained" sx={{marginRight: 5}} onClick={(e)=> handleFormdata()}>Save</Button>
                         <Button variant="outlined">Cancel</Button>
                     </Box>
                     
