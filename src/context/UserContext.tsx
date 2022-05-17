@@ -14,6 +14,7 @@ const UserCtxDefaultValue: UserCtxState = {
 
 export const UserContext = createContext(UserCtxDefaultValue);
 
+    
 const UserContextProvider = ({children}: childrenProps)=>{
     return(
         <UserContext.Provider value={UserCtxDefaultValue}>

@@ -1,6 +1,8 @@
 import { Avatar, Box, Button, styled, TextField, Typography } from "@mui/material";
+import { doc, serverTimestamp, setDoc } from "firebase/firestore";
 import { useContext, useEffect, useState } from "react";
 import { UserContext } from "../context/UserContext";
+import { db } from "../firebase/firebase";
 import MiniPost from "./mini-post";
 
 const BoxStyled = styled(Box)({
@@ -43,19 +45,32 @@ export default function ProfileContent(){
     const [email, setEmail] = useState('');
     const [title, setTitle] = useState('');
     const users = useContext(UserContext);
+    const userdata = JSON.parse(users.data || '');
     const handleFormdata = () =>{
         const profile={
             firstname: firstname,
             lastname: lastname,
-            email: email,
-            title: title
+            email: userdata.email,
+            title: title,
+            timeStamp: serverTimestamp()
         }
         
-        console.log(profile);
+        handleSetData(profile);
     }
-    useEffect(()=>{
-        console.log(users)
-    },[users])
+    const handleSetData = async (profiles:Object)=>{
+        try {
+           const res =  await setDoc(doc(db, "users",userdata.uid), {
+          ...profiles
+        })
+        console.log("send data success")
+        } catch (error) {
+          console.log(error);    
+        }
+      
+      }
+    // useEffect(()=>{
+    //     console.log(userdata.email)
+    // },[users])
     return(
         <Box flex={3}  height={1000}>
             <BoxStyled sx={{display: 'flex', flexDirection: 'column'}}>
@@ -100,9 +115,10 @@ export default function ProfileContent(){
                     <Box sx={{ width: '50%', display: 'flex', justifyContent:'space-between'}}>
                        <TextField
                     fullWidth
-                    id="outlined-required"
+                    disabled
+                    id="outlined-disabled"
                     label="email"
-                    defaultValue="Alexandra@gmail.com"
+                    defaultValue={userdata.email}
                     onChange={(e)=>setEmail(e.target.value)}
                     /> 
                     </Box>
@@ -116,7 +132,8 @@ export default function ProfileContent(){
                         <TextField
                     fullWidth
                     type={'password'}
-                    id="outlined-required"
+                    disabled
+                    id="outlined-disabled"
                     label="password"
                     defaultValue="se56sgsjsjksk"
                     />
