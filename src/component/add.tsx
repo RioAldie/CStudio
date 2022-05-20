@@ -95,8 +95,8 @@ export default function Add(){
                     />
                     </ListItem>
                     <StyledUpload>
-                    <TextField fullWidth label="Caption" id="fullWidth" />
-                        </StyledUpload>
+                        <TextField fullWidth label="Caption" id="fullWidth" />
+                    </StyledUpload>
                     <StyledUpload>
                         <Upload setOpen={setOpen}/>
                     </StyledUpload>

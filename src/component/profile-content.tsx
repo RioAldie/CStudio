@@ -1,8 +1,10 @@
-import { Avatar, Box, Button, styled, TextField, Typography } from "@mui/material";
+import { PhotoCamera } from "@mui/icons-material";
+import { Avatar, Box, Button, IconButton, Input, styled, TextField, Typography } from "@mui/material";
 import { doc, serverTimestamp, setDoc } from "firebase/firestore";
-import { useContext, useEffect, useState } from "react";
+import { ChangeEvent, useContext, useEffect, useState } from "react";
 import { UserContext } from "../context/UserContext";
-import { db } from "../firebase/firebase";
+import { db, storage } from "../firebase/firebase";
+import { ref, uploadBytesResumable, getDownloadURL, uploadString } from "firebase/storage";
 import MiniPost from "./mini-post";
 
 const BoxStyled = styled(Box)({
@@ -42,10 +44,14 @@ const BoxName = styled("div")(({theme}) =>({
 export default function ProfileContent(){
     const [firstname, setFirstname] = useState('');
     const [lastname, setLastname] = useState('');
-    const [email, setEmail] = useState('');
+    const [state, setState] = useState({})
+    const [photo, setPhoto] =  useState('')
+    const [file, setFile] = useState<Blob>();
     const [title, setTitle] = useState('');
+    const [data, setData ] = useState({});
     const users = useContext(UserContext);
     const userdata = JSON.parse(users.data || '');
+    
     const handleFormdata = () =>{
         const profile={
             firstname: firstname,
@@ -56,7 +62,10 @@ export default function ProfileContent(){
         }
         
         handleSetData(profile);
+        setData(profile);
     }
+   
+   
     const handleSetData = async (profiles:Object)=>{
         try {
            const res =  await setDoc(doc(db, "users",userdata.uid), {
@@ -68,13 +77,59 @@ export default function ProfileContent(){
         }
       
       }
-    // useEffect(()=>{
-    //     console.log(userdata.email)
-    // },[users])
+      const Input = styled('input')({
+        display: 'none',
+      });
+    
+      const handleUploadImage = (e:ChangeEvent<HTMLInputElement>) => {
+        const file = e.currentTarget.files[0];
+        // const reader = new FileReader();
+        // reader.readAsDataURL(file);
+        // reader.onloadend = () => {
+        //   setState({
+        //     image: URL.createObjectURL(file),
+        //     userImage: reader.result,
+        //   });
+        // };
+        setFile(file);
+       const name = new Date().getTime();
+        const imageName = `${name}.png`
+        const storageRef = ref(storage, imageName);
+        const uploadTask = uploadBytesResumable(storageRef, file);
+        uploadTask.on('state_changed', 
+        (snapshot) => {
+
+            const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+            console.log('Upload is ' + progress + '% done');
+            switch (snapshot.state) {
+            case 'paused':
+                console.log('Upload is paused');
+                break;
+            case 'running':
+                console.log('Upload is running');
+                break;
+            }
+        }, 
+        (error) => {
+            // Handle unsuccessful uploads
+            console.log(error)
+        }, 
+        () => {
+            getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
+            setData((prev) =>({...prev, img: downloadURL}));
+            setPhoto(downloadURL)
+            });
+            
+        }
+        );
+      }
+ 
+     
+      
     return(
         <Box flex={3}  height={1000}>
             <BoxStyled sx={{display: 'flex', flexDirection: 'column'}}>
-            <Avatar alt="Remy Sharp" src={`/image/avatar-1.png`} 
+            <Avatar alt="Remy Sharp" src={photo} 
             sx={{ width: 150, height: 150 }}
             />
                     <Typography variant="h6" fontWeight={"normal"}>
@@ -84,6 +139,12 @@ export default function ProfileContent(){
                         shendong@gmail.com
                     </Typography>
             </BoxStyled>
+            <label htmlFor="icon-button-file">
+                <Input accept="image/*" id="icon-button-file" type="file" onChange={(e)=> handleUploadImage(e)}/>
+                <IconButton color="primary" aria-label="upload picture" component="span">
+                <PhotoCamera />
+                </IconButton>
+            </label> 
             <Typography variant="h5" fontWeight={"bold"}>
                         Profile
                     </Typography>
@@ -119,7 +180,7 @@ export default function ProfileContent(){
                     id="outlined-disabled"
                     label="email"
                     defaultValue={userdata.email}
-                    onChange={(e)=>setEmail(e.target.value)}
+                 
                     /> 
                     </Box>
                     
