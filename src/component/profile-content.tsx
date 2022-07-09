@@ -5,6 +5,7 @@ import { ChangeEvent, useContext, useEffect, useState } from "react";
 import { UserContext } from "../context/UserContext";
 import { db, storage } from "../firebase/firebase";
 import { ref, uploadBytesResumable, getDownloadURL, uploadString } from "firebase/storage";
+import { collection, getDocs } from "firebase/firestore";
 import MiniPost from "./mini-post";
 
 const BoxStyled = styled(Box)({
@@ -48,7 +49,14 @@ export default function ProfileContent(){
     const [photo, setPhoto] =  useState('')
     const [file, setFile] = useState<Blob>();
     const [title, setTitle] = useState('');
-    const [data, setData ] = useState({});
+    const [data, setData ] = useState({
+        firstname: '',
+        lastname: '',
+        email: '',
+        title: '',
+        timeStamp: '',
+        photo: ''
+    });
     const users = useContext(UserContext);
     const userdata = JSON.parse(users.data || '');
     
@@ -58,13 +66,26 @@ export default function ProfileContent(){
             lastname: lastname,
             email: userdata.email,
             title: title,
-            timeStamp: serverTimestamp()
+            timeStamp: serverTimestamp(),
+            photo: photo
         }
         
         handleSetData(profile);
-        setData(profile);
+        // setData(profile);
     }
-   
+   const FetchData = async() =>{
+    const querySnapshot = await getDocs(collection(db, "users"));
+    querySnapshot.forEach((doc) => {
+        // doc.data() is never undefined for query doc snapshots
+        const data = doc.data();
+        console.log(data.firstname);
+        setFirstname(data.firstname);
+      });
+   }
+   useEffect(()=>{
+        FetchData()
+        console.log(firstname)
+   },[])
    
     const handleSetData = async (profiles:Object)=>{
         try {
@@ -116,7 +137,6 @@ export default function ProfileContent(){
         }, 
         () => {
             getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
-            setData((prev) =>({...prev, img: downloadURL}));
             setPhoto(downloadURL)
             });
             
@@ -133,7 +153,7 @@ export default function ProfileContent(){
             sx={{ width: 150, height: 150 }}
             />
                     <Typography variant="h6" fontWeight={"normal"}>
-                        Shen Dong
+                       {firstname}
                     </Typography>
                     <Typography variant="h6" fontWeight={"light"} color={'gray'}>
                         shendong@gmail.com
@@ -157,7 +177,8 @@ export default function ProfileContent(){
                     <TextField
                     id="outlined-required"
                     label="firstname"
-                    defaultValue="Alexandra"
+                    defaultValue={firstname}
+                    value={firstname}
                     onChange={(e)=>setFirstname(e.target.value)}
                     />
                      <TextField

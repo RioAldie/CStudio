@@ -71,7 +71,7 @@ export default function Add(){
                 }}
             >
                 <Fade in={open}>
-                <Box width={500} height={320} bgcolor={"background.default"} color={"text.primary"} p={3} borderRadius={3} >
+                <Box width={500} height={420} bgcolor={"background.default"} color={"text.primary"} p={3} borderRadius={3} >
                    <Typography variant="h5" color="gray" textAlign={'center'}>Post Content</Typography>
                     <ListItem alignItems="flex-start" sx={{cursor: 'pointer'}}>
                     <ListItemAvatar>
@@ -94,9 +94,9 @@ export default function Add(){
                     }
                     />
                     </ListItem>
-                    <StyledUpload>
+                    {/* <StyledUpload>
                         <TextField fullWidth label="Caption" id="fullWidth" />
-                    </StyledUpload>
+                    </StyledUpload> */}
                     <StyledUpload>
                         <Upload setOpen={setOpen}/>
                     </StyledUpload>

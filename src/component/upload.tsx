@@ -7,6 +7,8 @@ import Stack from '@mui/material/Stack';
 import { addDoc, collection, doc, serverTimestamp, setDoc } from 'firebase/firestore';
 import { db } from '../firebase/firebase';
 import React, { useState } from 'react';
+import { Box, FormControl, InputLabel, MenuItem, TextField } from '@mui/material';
+import Select, { SelectChangeEvent } from '@mui/material/Select';
 
 const Input = styled('input')({
   display: 'none',
@@ -18,6 +20,11 @@ interface uploadProps{
 export default function Upload(props: uploadProps) {
   const [caption, setCaption] = useState();
   const [photo, setPhoto] =  useState();
+  const [age, setAge] = React.useState('');
+
+  const handleChange = (event: SelectChangeEvent) => {
+    setAge(event.target.value as string);
+  };
   const {setOpen} = props;
   const handleSetData = async ()=>{
     try {
@@ -34,27 +41,42 @@ export default function Upload(props: uploadProps) {
   
   }
   return (
-    <Stack direction="row" alignItems="center" spacing={2}>
-      <form>
-      {/* <label htmlFor="contained-button-file">
-        <Input accept="image/*" id="contained-button-file" multiple type="file" />
-        <Button variant="contained" component="span">
-          Upload
-        </Button>
-      </label> */}
+    <Stack direction="row" alignItems="center" spacing={2} sx={{display:'flex', flexDirection:'column',justifyContent:'space-evenly',alignItems:'center'}}>
+      
+      <label htmlFor="">
+      <Box sx={{ minWidth: '450px' }}>
+            <TextField fullWidth label="Caption" id="fullWidth" />
+            <FormControl fullWidth sx={{mt:3}}>
+              <InputLabel id="demo-simple-select-label">Age</InputLabel>
+              <Select
+                labelId="demo-simple-select-label"
+                id="demo-simple-select"
+                value={age}
+                label="Age"
+                onChange={handleChange}
+              >
+                <MenuItem value={10}>Ten</MenuItem>
+                <MenuItem value={20}>Twenty</MenuItem>
+                <MenuItem value={30}>Thirty</MenuItem>
+              </Select>
+            </FormControl>
+          </Box>
+      </label>
+      <Box sx={{mt: 3}}>
       <label htmlFor="icon-button-file">
         <Input accept="image/*" id="icon-button-file" type="file" />
-        <IconButton color="primary" aria-label="upload picture" component="span">
+        <IconButton color="primary" aria-label="upload picture" component="span" sx={{mt: 3}}>
           <PhotoCamera />
-        </IconButton>
-      </label> 
-      <label htmlFor="">
-        <Button variant="contained" component="span" >
-          Upload
-        </Button>
+         </IconButton>
       </label>
-
-        </form>
+        
+        
+        <label htmlFor="">
+          <Button variant="contained" component="span" sx={{mt: 3}}>
+            Upload
+          </Button>
+        </label>
+      </Box>
     </Stack>
   );
 }

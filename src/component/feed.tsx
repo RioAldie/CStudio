@@ -1,7 +1,8 @@
 import { Alert, Avatar, Box,Card,CardActions,CardContent,CardHeader,CardMedia,Checkbox,Collapse,IconButton,Stack,styled,Typography } from "@mui/material";
+import { useCallback, useEffect } from "react";
+import { getNewRecipe } from "../service/recipe";
 import Post from "./post";
 const Feed = () =>{
-
     const PostContainer = styled(Box)({
         display: 'flex',
         justifyContent: 'center',
